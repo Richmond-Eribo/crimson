@@ -6,17 +6,21 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout title="Welcome to Alizarin Crimson">
-  <div class="astro-a"></div>
-  <img src="/logo 2.png" alt="alizarin crimson logo" class="logo" />
+  <div
+    class="absolute -top-8 left-1/2 -translate-x-1/2 -z-10 w-[200px] h-[200px] flex-shrink-0 rounded-full bg-white/10 blur-[50px]"
+  >
+  </div>
+  <img
+    src="/logo 2.png"
+    alt="alizarin crimson logo"
+    class="logo absolute top-[50px] left-1/2 -translate-x-1/2 w-[70px]"
+  />
   <main>
-    <div>
-      <div
-        class="lg:text-8xl flex text-3xl text-center text-wrapper capitalize"
-      >
-        <h2 class="font-bold">Alizarin Crimson</h2>
-      </div>
-      <!-- <span class="subtext">creating designs</span> -->
-      <!-- <WaitlistInput /> -->
+    <div class="text-center text-wrapper capitalize">
+      <h2 class="font-bold lg:text-4xl text-3xl mb-10">
+        Alizarin Crimson Publishers
+      </h2>
+      <span class="text-center">Publishers@acrimson.com</span>
     </div>
   </main>
 </Layout>
@@ -39,19 +43,13 @@ import Layout from "../layouts/Layout.astro"
   const tl = gsap.timeline({ paused: true, repeat: 0 })
 
   loadingTL
-    .fromTo(
-      logo,
-      {
-        top: "50%",
-        y: "-50%",
-      },
-      {
-        top: "12px",
-        y: "0%",
-        duration: 1.5,
-        ease: "power2.out",
-      }
-    )
+    .to(logo, {
+      top: "120px",
+      y: "0%",
+      duration: 1.5,
+      scale: 2,
+      ease: "power2.out",
+    })
     .from("#title", {
       y: -100,
       opacity: 0,
@@ -66,7 +64,7 @@ import Layout from "../layouts/Layout.astro"
   })
 
   function gsapTextArrayAnimation(char: any, text?: any) {
-    tl.from(
+    loadingTL.from(
       char,
       {
         opacity: 0,
@@ -74,7 +72,7 @@ import Layout from "../layouts/Layout.astro"
         rotateX: -90,
         stagger: 0.02,
       },
-      "<"
+      0.5
     )
   }
 </script>
@@ -86,70 +84,13 @@ import Layout from "../layouts/Layout.astro"
     min-height: 100vh;
     max-width: 1444px;
     color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    z-index: -1;
-    width: 200px;
-    height: 200px;
-    flex-shrink: 0;
-    border-radius: 500px;
-    background: rgba(255, 255, 255, 0.1);
-    filter: blur(50px);
   }
 
-  img {
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 70px;
-    /* margin: auto; */
-  }
   h1 {
     font-size: 5rem;
     font-weight: 700;
     line-height: 1;
     text-align: center;
     margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent-light));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
   }
 </style>
