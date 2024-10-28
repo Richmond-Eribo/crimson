@@ -13,14 +13,16 @@ import Layout from "../layouts/Layout.astro"
   <img
     src="/logo 2.png"
     alt="alizarin crimson logo"
-    class="logo absolute top-[50px] left-1/2 -translate-x-1/2 w-[70px]"
+    class="logo absolute invisible top-[50px] left-1/2 -translate-x-1/2 w-[70px]"
   />
   <main>
     <div class="text-center text-wrapper capitalize">
-      <h2 class="font-bold lg:text-4xl text-3xl mb-10">
+      <h2 class="font-bold lg:text-4xl text-xl mb-10">
         Alizarin Crimson Publishers
       </h2>
-      <span class="text-center" id="email">Publishers@acrimson.com</span>
+      <span class="text-center invisible" id="email"
+        >Publishers@acrimson.com</span
+      >
     </div>
   </main>
 </Layout>
@@ -41,6 +43,7 @@ import Layout from "../layouts/Layout.astro"
   tl.to(logo, {
     top: "120px",
     y: "0%",
+    autoAlpha: 1,
     duration: 1.5,
     scale: 2,
     ease: "power2.out",
@@ -48,6 +51,7 @@ import Layout from "../layouts/Layout.astro"
     .from("#title", {
       y: -100,
       opacity: 0,
+      autoAlpha: 0,
       duration: 1,
       ease: "power2.out",
     })
