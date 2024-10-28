@@ -20,52 +20,52 @@ import Layout from "../layouts/Layout.astro"
       <h2 class="font-bold lg:text-4xl text-3xl mb-10">
         Alizarin Crimson Publishers
       </h2>
-      <span class="text-center">Publishers@acrimson.com</span>
+      <span class="text-center" id="email">Publishers@acrimson.com</span>
     </div>
   </main>
 </Layout>
 
 <script>
   import { gsap } from "gsap"
-  import SplitTextJS from "split-text-js"
+  import SplitInnerText from "../libs/splitinnerhtml"
 
   const logo = document.querySelector(".logo")
+  const titles: HTMLElement[] = gsap.utils.toArray("h2")
 
-  const titles = gsap.utils.toArray("h2")
-  const loadingTL = gsap.timeline({
+  const tl = gsap.timeline({
     defaults: {
       ease: "power2.out",
     },
-    onComplete: () => {
-      tl.resume()
-    },
   })
-  const tl = gsap.timeline({ paused: true, repeat: 0 })
 
-  loadingTL
-    .to(logo, {
-      top: "120px",
-      y: "0%",
-      duration: 1.5,
-      scale: 2,
-      ease: "power2.out",
-    })
+  tl.to(logo, {
+    top: "120px",
+    y: "0%",
+    duration: 1.5,
+    scale: 2,
+    ease: "power2.out",
+  })
     .from("#title", {
       y: -100,
       opacity: 0,
       duration: 1,
       ease: "power2.out",
     })
+    .from(
+      "#email",
+      {
+        y: -40,
+        autoAlpha: 0,
+        ease: "power2.in",
+      },
+      0.8
+    )
 
   titles.forEach(title => {
-    const splitTitle = new SplitTextJS(title)
+    const splitTitle = new SplitInnerText(title)
 
-    gsapTextArrayAnimation(splitTitle.chars)
-  })
-
-  function gsapTextArrayAnimation(char: any, text?: any) {
-    loadingTL.from(
-      char,
+    tl.from(
+      splitTitle.chars,
       {
         opacity: 0,
         y: 40,
@@ -74,7 +74,7 @@ import Layout from "../layouts/Layout.astro"
       },
       0.5
     )
-  }
+  })
 </script>
 
 <style>
